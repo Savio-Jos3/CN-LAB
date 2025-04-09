@@ -1,0 +1,40 @@
+Stop and Wait Server : 
+1. Create a socket using the socket() function. 
+2. Bind the socket to a specific port using the bind() function. 
+3. Create a loop to continuously receive frames from the client. 
+4. Receive the frame using the recvfrom() function. 
+5. If the received frame's frame_kind is 1 (data frame) and the sq_no matches the 
+expected frame_id: 
+a) Print the received data from the packet. 
+b) Create an acknowledgment frame (frame_send) with frame_kind = 0 
+(acknowledgment frame), sq_no = 0, and ack = frame_recv.sq_no + 1. 
+c) Send the acknowledgment frame to the client using the sendto() function. 
+6. If the received frame is not as expected (frame_kind is not 1 or sq_no doesn't match): 
+a) Print a message indicating that the frame was not received properly. 
+7. Increment the frame_id to expect the next frame. 
+8. Repeat steps 4 to 7 for subsequent frames. 
+9. Close the socket using the close() function. 
+
+
+Stop and Wait Client : 
+1. Create a socket using the socket() function. 
+2. Initialize the server address and port. 
+3. Create a loop to continuously send frames to the server. 
+4. If the previous acknowledgment (ack_recv) is 1 (indicating the previous frame was 
+successfully acknowledged): 
+a) Create a data frame (frame_send) with frame_kind = 1, sq_no = frame_id, ack = 
+0. 
+b) Prompt the user to enter the data to be sent and store it in the frame_send's packet 
+data field. 
+c) Send the data frame to the server using the sendto() function. 
+5. Receive the acknowledgment frame from the server using the recvfrom() function. 
+6. If the acknowledgment frame's sq_no is 0 and ack matches frame_id + 1: 
+a) Print a message indicating that the acknowledgment was received. 
+b) Set ack_recv to 1 to indicate successful acknowledgment. 
+7. If the acknowledgment frame is not as expected (sq_no is not 0 or ack doesn't match 
+frame_id + 1): 
+a) Print a message indicating that the acknowledgment was not received properly. 
+b) Set ack_recv to 0 to indicate unsuccessful acknowledgment. 
+8. Increment the frame_id to prepare for the next frame. 
+9. Repeat steps 4 to 8 for subsequent frames. 
+10. Close the socket using the close() function.
