@@ -1,0 +1,59 @@
+Go Back N Server: 
+1. Create a client socket using the socket() function with domain AF_INET,type 
+SOCK_STREAM, and protocol 0. 
+2. Initialize the client address structure (client) with zeros using memset(). 
+3. Set the address family (AF_INET), port number (htons(9009)), and IP address 
+(inet_addr("127.0.0.1")) in the client structure. 
+4. Connect the client socket to the server using the connect() function and the client 
+structure as the socket address. If the connection fails, print an error message and 
+exit. 
+5. Print a message indicating that the client is ready. 
+6. Initialize message buffers: msg1 for the acknowledgement message, msg2 for 
+constructing acknowledgement messages, and buff for receiving data from the server. 
+7. Initialize flags: flag and flg. 
+8. Start a loop from 0 to 9 to receive messages and send acknowledgements. 
+a. Clear the buff and msg2 buffers. 
+b. If i is 8 and flag is 1, simulate a loss by reading from the server without 
+storing the data. 
+c. Read the message from the server into the buff buffer. 
+d. Check if the received message is in order by comparing the last character of 
+the message with the expected value (i + '0'). 
+e. If the message is out of order, print a discard message and decrement by 1. 
+f. If the message is in order: 
+• Print the received message and the corresponding index. 
+• Print a message indicating that the acknowledgement is sent. 
+• Construct the acknowledgement message in msg2 by appending the 
+acknowledgement prefix (msg1) and the index value (i + '0'). 
+• Send the acknowledgement message to the server using the write() function. 
+9. Close the client socket. 
+10. End the program. 
+
+
+
+Go Back N Client : 
+1. Include the necessary header files. 
+2. Declare a variable for the client socket descriptor: c_sock. 
+3. Create a socket using the socket() function with domain AF_INET, type 
+SOCK_STREAM, and protocol 0. 
+4. Initialize the client address structure (client) and set the port, IP address and family. 
+5. Connect the client socket to the server using the connect() function. If the connection 
+fails, print an error message and exit. 
+6. Print a message indicating that the client is ready. 
+7. Initialize message buffers: msg1 for the acknowledgement message, msg2 for 
+constructing acknowledgement messages, and buff for receiving data from the server. 
+8. Initialize flags: flag and flg. 
+9. Enter a loop from 0 to 9 to receive messages and send acknowledgements. 
+10. Clear the message and buffer. 
+11. If i is 8 and flag is 1, simulate a loss by reading from the server without storing the 
+data. 
+12. Read the message from the server into the buff buffer. 
+13. Check if the received message is in order by comparing the last character of the 
+message with the expected value. 
+14. If the message is out of order, print a discard message and decrement i by 1. 
+15. If the message is in order, print the received message and the corresponding index. 
+16. Print a message indicating that the acknowledgement is sent. 
+17. Construct the acknowledgement message in msg2 using the acknowledgement prefix 
+and the index value. 
+18. Send the acknowledgement message to the server using the write() function. 
+19. Close the client socket. 
+20. End the program. 
