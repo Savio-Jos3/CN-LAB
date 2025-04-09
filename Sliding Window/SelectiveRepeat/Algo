@@ -1,0 +1,33 @@
+Selective Repeat Server: 
+1. Create a socket using the socket() function. 
+2. Set up the server address and port. 
+3. Bind the socket to the server address using the bind() function. 
+4. Listen for incoming connections using the listen() function. 
+5. Accept a client connection using the accept() function. 
+6. Initialize necessary variables and data structures. 
+7. Enter a loop until all messages are successfully received and acknowledged: 
+a. Send a batch of messages (e.g., 3 messages) to the client. 
+b. For each message sent, wait for an acknowledgment from the client using the 
+select() function with a timeout. 
+c. If a timeout occurs, re-send the message by calling the rsendd() function. 
+d. If an acknowledgment is received, check for corruption. If the message is 
+corrupted, re-send the message. e. If the message is not corrupted, increment the 
+total count. 
+8. Close the client and server sockets 
+
+
+
+
+Selective Repeat Client: 
+1. Create a socket using the socket() function. 
+2. Set up the server address and port. 
+3. Connect to the server using the connect() function. 
+4. Initialize necessary variables and data structures. 
+5. Enter a loop until all messages are received and acknowledged: 
+a. Receive a message from the server. 
+b. Simulate corruption of the message using the isfaulty() function. 
+c. Send an acknowledgment message to the server indicating whether the 
+message is acknowledged or not. 
+d. If the message is not acknowledged due to corruption, the server will resend 
+the message. e. If the message is acknowledged, increment the count. 
+6. Close the client socket.
